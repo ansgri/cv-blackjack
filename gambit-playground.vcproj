@@ -211,6 +211,14 @@
 				Name="cv-blackjack"
 				>
 				<File
+					RelativePath=".\cv-blackjack\cv-helpers.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\cv-blackjack\cv-helpers.h"
+					>
+				</File>
+				<File
 					RelativePath=".\cv-blackjack\cv.c"
 					>
 				</File>

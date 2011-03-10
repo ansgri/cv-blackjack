@@ -30,6 +30,16 @@
             (cv:add-weighted frame 0.8 buf1 0.2 0.0 buf2)
             buf2)))))
 
+(define (show-video-with-cvt)
+  (cv:with-capture cap
+    (let ((first-frame (cv:query-frame cap)))
+      (using-cv:images ((buf1 (cv:new-image-based-on first-frame depth: cv:IPL_DEPTH_8U channels: 1))
+                        (buf2 (cv:clone-image first-frame)))
+          (cv:run-videostream-transformer cap frame
+            (cv:cvt-color frame buf1 cv:RGB2GRAY)
+            ;;(cv:add-weighted frame 0.8 buf1 0.2 0.0 buf2)
+            buf1)))))
+
 (define (show-bgproc alpha)
   (cv:with-capture cap
     (let ((first-frame (cv:query-frame cap)))
@@ -63,6 +73,7 @@
 
 (show-video)
 (show-video-with-reflections)
+(show-video-with-cvt)
 (show-bgproc 0.01)
 (show-bgproc-morph 0.01 10)
 

@@ -7,6 +7,8 @@
 #include <opencv/cv.h>
 #include <opencv/highgui.h>
 
+#include "cv-helpers.h"
+
 c-declare-end
 )
 
@@ -48,6 +50,29 @@ c-declare-end
 
 (define cv:clone-image
   (c-lambda ((pointer "IplImage")) (pointer "IplImage") "cvCloneImage"))
+
+(define cv:new-image-based-on-impl
+  (c-lambda ((pointer "IplImage") int int int int) (pointer "IplImage") 
+            "cvbjNewImageBasedOn"))
+
+(define cv:IPL_DEPTH_1U 1)
+(define cv:IPL_DEPTH_8U 8)
+(define cv:IPL_DEPTH_16U 16)
+(define cv:IPL_DEPTH_32F 32)
+(define cv:BGR2RGB 4)
+(define cv:BGR2GRAY 6)
+(define cv:RGB2GRAY 7)
+(define cv:GRAY2BGR 8)
+(define cv:GRAY2RGB cv:GRAY2BGR)
+
+
+(define (cv:new-image-based-on img #!key (depth 0) (channels 0) (width 0) (height 0))
+  (cv:new-image-based-on-impl img depth channels width height))
+
+(define cv:cvt-color
+  (c-lambda ((pointer "CvArr" #f) (pointer "CvArr" #f) int) 
+            void
+            "cvCvtColor"))
 
 (define cv:release-mat
   (c-lambda ((pointer "CvMat")) void 
