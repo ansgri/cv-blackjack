@@ -7,7 +7,7 @@
 #include <opencv/cv.h>
 #include <opencv/highgui.h>
 
-#include "cv-helpers.h"
+#include "../cv-helpers.h"
 
 c-declare-end
 )
